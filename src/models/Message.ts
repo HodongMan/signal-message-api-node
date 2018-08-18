@@ -1,4 +1,4 @@
-import {Table, Column, Model, DataType, PrimaryKey, CreatedAt, UpdatedAt, AutoIncrement} from 'sequelize-typescript';
+import {Table, Column, Model, DataType, PrimaryKey, CreatedAt, UpdatedAt, AutoIncrement, Default} from 'sequelize-typescript';
 
 @Table
 export class Message extends Model<Message> {
@@ -14,11 +14,9 @@ export class Message extends Model<Message> {
     @Column(DataType.STRING)
     to: string;
 
+    @Default(0)
     @Column(DataType.TINYINT)
     status: number;
-
-    @Column(DataType.STRING)
-    title: string;
 
     @Column(DataType.TEXT)
     description: string;
@@ -46,10 +44,6 @@ export class Message extends Model<Message> {
 
     public getStatus(): number {
         return this.status;
-    }
-
-    public getTitle(): string {
-        return this.title;
     }
 
     public getDescription(): string {

@@ -1,8 +1,8 @@
 import {Request, Response} from "express";
 
 import { listMessage, createMessage } from '../controllers/MessageController'
-import { listRoom, createRoom } from '../controllers/RoomController';
-import { listRoomList, createRoomList } from '../controllers/RoomListController'
+import { listRoom, createRoom, listMyRoom } from '../controllers/RoomController';
+import { listRoomMember, createRoomMember, listMyRoomMember } from '../controllers/RoomListController'
 
 // 메인 라우터 입니다 
 
@@ -13,13 +13,19 @@ export class Routes {
         .get(listMessage)
         .post(createMessage)
 
+        app.route("/api/message/my")
+        .get(listMyRoom)
+
         app.route("/api/room")
         .get(listRoom)
         .post(createRoom)
 
         app.route("/api/room/member")
-        .get(listRoomList)
-        .post(createRoomList)
+        .get(listRoomMember)
+        .post(createRoomMember)
+
+        app.route("/api/room/member/my")
+        .get(listMyRoomMember)
 
         app.route('/')
         .get((req: Request, res: Response) => {            

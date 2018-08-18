@@ -23,3 +23,18 @@ export async function listRoom(req: Request, res: Response, next: NextFunction) 
         next(e);
     }
 }
+
+export async function listMyRoom(req: Request, res: Response, next: NextFunction) {
+    try {
+        const roomList = await Room.findAll({
+            where: {
+                id : "hodong"
+            }
+        });
+        res.status(201).json({
+            result : roomList,
+        })
+    } catch(e) {
+        next(e);
+    }
+}
