@@ -1,4 +1,4 @@
-import {Table, Column, Model, DataType, PrimaryKey, CreatedAt, UpdatedAt, AutoIncrement, Default} from 'sequelize-typescript';
+import {Table, Column, Model, DataType, PrimaryKey, CreatedAt, UpdatedAt, AutoIncrement, Default, AllowNull} from 'sequelize-typescript';
 
 @Table
 export class Message extends Model<Message> {
@@ -8,16 +8,19 @@ export class Message extends Model<Message> {
     @Column
     id: number;
 
-    @Column(DataType.STRING)
-    from: string;
+    @AllowNull(false)
+    @Column(DataType.BIGINT)
+    from: number;
 
-    @Column(DataType.STRING)
-    to: string;
+    @AllowNull(false)
+    @Column(DataType.BIGINT)
+    to: number;
 
     @Default(0)
     @Column(DataType.TINYINT)
     status: number;
 
+    @AllowNull(false)
     @Column(DataType.TEXT)
     description: string;
 
@@ -34,11 +37,11 @@ export class Message extends Model<Message> {
         return this.id;
     }
 
-    public getFrom(): string {
+    public getFrom(): number {
         return this.from;
     }
 
-    public getTo(): string {
+    public getTo(): number {
         return this.to;
     }
 

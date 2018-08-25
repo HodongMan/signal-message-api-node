@@ -4,6 +4,8 @@ import { Message } from '../models/Message';
 
 export async function createMessage(req: Request, res: Response, next: NextFunction) {
     try {
+        req.body.from = req.user.id;
+        req.body.to = 2;
         const message = await Message.create(req.body);
         res.status(201).json({
             result : message
